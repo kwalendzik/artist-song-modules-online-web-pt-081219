@@ -1,17 +1,18 @@
 require 'pry'
 
 class Artist
-  
-  extend Memorable
-  include Paramble
-  
   attr_accessor :name
   attr_reader :songs
+
+  extend Memorable::ClassMethods 
+  include Memorable::InstanceMethods
+  extend Findable
+  include Paramable
 
   @@artists = []
 
   def initialize
-    @@artists << self
+    super
     @songs = []
   end
 
@@ -27,5 +28,4 @@ class Artist
   def add_songs(songs)
     songs.each { |song| add_song(song) }
   end
-
 end
